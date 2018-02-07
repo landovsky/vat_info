@@ -1,6 +1,7 @@
 require 'vat_info/version'
 require 'vat_info/utils'
 require 'vat_info/request'
+require 'vat_info/response'
 require 'vat_info/query'
 
 require 'json'

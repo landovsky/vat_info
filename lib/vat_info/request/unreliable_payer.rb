@@ -14,14 +14,6 @@ module VatInfo
           end
         end.doc
       end
-
-      def to_xml
-        msg  = envelope.dup
-        body = msg.at_xpath('//soapenv:Body')
-        body.add_child(self.body.root)
-
-        msg.to_xml
-      end
     end
   end
 end

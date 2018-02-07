@@ -4,7 +4,10 @@ require 'vat_info/models/vat_payer'
 require 'vat_info/models/vat_payers'
 
 module VatInfo
+  class SchemaError < StandardError; end
+
   class Query
+    DOCS = 'https://adisspr.mfcr.cz/adistc/adis/idpr_pub/dpr_info/ws_spdph.faces'
     WSDL = 'http://adisrws.mfcr.cz/adistc/axis2/services/rozhraniCRPDPH.rozhraniCRPDPHSOAP?wsdl'.freeze
     TIMEOUT = 2
 
@@ -14,26 +17,16 @@ module VatInfo
       begin
         response = client.call(endpoint, xml: request)
         if response.success?
-          Response.new(status_code: 200, body: response.body)
+          VatInfo::Response.new(status_code: 200, body: response.body)
         else
-          Response.new(status_code: 503)
+          VatInfo::Response.new(status_code: 503)
         end
       rescue Net::OpenTimeout
-        Response.new(status_code: 408)
+        VatInfo::Response.new(status_code: 408)
+      rescue Savon::SOAPFault => e
+        raise SchemaError, 'The SOAP schema of VAT service may have changed. Go to '\
+                                "#{DOCS} to verify. Original error: #{e}"
       end
-    end
-  end
-
-  class Response
-    attr_accessor :status_code, :body
-
-    def initialize(status_code:, body:)
-      @status_code = status_code
-      @body        = body
-    end
-
-    def ok?
-      status_code == 200
     end
   end
 end

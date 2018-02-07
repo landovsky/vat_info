@@ -6,6 +6,7 @@ module VatInfo
       def initialize(params)
         @data                       = {}
         @data[:nespolehlivy_platce] = params.fetch(:@nespolehlivy_platce)
+        @data[:datum_zverejneni]    = params.fetch(:@datum_zverejneni_nespolehlivosti, nil)
         @data[:dic]                 = params.fetch(:@dic)
         @data[:cislo_fu]            = params.fetch(:@cislo_fu, nil)
         accounts                    = params.fetch(:zverejnene_ucty, nil)
@@ -13,18 +14,19 @@ module VatInfo
       end
 
       def create_accounts(accounts)
-        accounts.map do |account|
+        VatInfo::Utils.wrap_in_array(accounts).map do |account|
           standard     = account.fetch(:standardni_ucet, nil)
           non_standard = account.fetch(:nestandardni_ucet, nil)
 
           params = if standard
-                     {
+                     { predcisli: standard.fetch(:@predcisli, nil),
                        cislo: standard.fetch(:@cislo, nil),
                        kod_banky: standard.fetch(:@kod_banky, nil),
                        iban: nil
                      }
                    else
-                     { cislo: nil,
+                     { predcisli: nil,
+                       cislo: nil,
                        kod_banky: nil,
                        iban: non_standard.fetch(:@cislo, nil)
                      }

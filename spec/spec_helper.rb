@@ -1,26 +1,39 @@
-$LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
+require 'pry'
+
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
 require_relative '../lib/vat_info'
 require 'vcr'
+require 'nokogiri'
 
 VCR.configure do |config|
-  config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+  config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
   config.hook_into :webmock
 end
 
-RSpec::Matchers.define :match_xsd do |expected|
-  match do |actual|
-    schema = Nokogiri::XML::Schema(File.open(expected))
-    errors = schema.validate(actual)
+Dir[File.join('.', '/spec/shared/**/*.rb')].each { |f| require f }
 
-    errors.size == 0
+RSpec::Matchers.define :have_xml do |xpath, text|
+  match do |body|
+    nodes = body.xpath(xpath)
+    expect(nodes.empty?).to be false
+    if text
+      nodes.each do |node|
+        expect(node.content).to eq text
+      end
+    end
+    true
   end
 
-  failure_message do |actual|
-    schema = Nokogiri::XML::Schema(File.open(expected))
-    errors = schema.validate(actual)
+  failure_message do |body|
+    "expected to find xml tag #{xpath} in:\n#{body}"
+  end
 
-    msg = "expected given document to match #{expected} schema but there are following errors:"
-    errors.insert(0, msg).join("\n")
+  failure_message_when_negated do |body|
+    "expected not to find xml tag #{xpath} in:\n#{body}"
+  end
+
+  description do
+    "have xml tag #{xpath}"
   end
 end
