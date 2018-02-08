@@ -19,12 +19,12 @@ http_interactions:
       message: '200'
     headers:
       Date:
-      - Wed, 07 Feb 2018 16:11:00 GMT
+      - Thu, 08 Feb 2018 11:10:54 GMT
       Server:
       - Apache
       Set-Cookie:
-      - BIGipServerrws1http=1462787082.20480.0000; path=/
-      - JSESSIONID=2054AA3A42A73B5CB9FC27DAB330A6E0.ep1ap5; Path=/adistc; HttpOnly
+      - BIGipServerrws3http=3610270730.20480.0000; path=/
+      - JSESSIONID=D43BEEBEB1A1040A16E4587D421C641D.ep3ap3; Path=/adistc; HttpOnly
       Accept-Ranges:
       - bytes
       Etag:
@@ -379,7 +379,7 @@ http_interactions:
         Pg0KICAgIDwvd3NkbDpwb3J0Pg0KICA8L3dzZGw6c2VydmljZT4NCjwvd3Nk
         bDpkZWZpbml0aW9ucz4=
     http_version: 
-  recorded_at: Wed, 07 Feb 2018 16:11:18 GMT
+  recorded_at: Thu, 08 Feb 2018 11:10:53 GMT
 - request:
     method: post
     uri: https://adisrws.mfcr.cz/adistc/axis2/services/rozhraniCRPDPH.rozhraniCRPDPHSOAP
@@ -405,7 +405,7 @@ http_interactions:
       message: '500'
     headers:
       Date:
-      - Wed, 07 Feb 2018 16:10:59 GMT
+      - Thu, 08 Feb 2018 11:10:54 GMT
       Server:
       - Apache
       X-Content-Type-Options:
@@ -422,7 +422,7 @@ http_interactions:
       encoding: UTF-8
       string: |-
         <?xml version='1.0' encoding='UTF-8'?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Body><soapenv:Fault><faultcode></faultcode><faultstring>com.ctc.wstx.exc.WstxEOFException: Unexpected EOF in prolog
-         at javax.xml.stream.SerializableLocation@efb875e2</faultstring><detail /></soapenv:Fault></soapenv:Body></soapenv:Envelope>
+         at javax.xml.stream.SerializableLocation@85f936b7</faultstring><detail /></soapenv:Fault></soapenv:Body></soapenv:Envelope>
     http_version: 
-  recorded_at: Wed, 07 Feb 2018 16:11:18 GMT
+  recorded_at: Thu, 08 Feb 2018 11:10:53 GMT
 recorded_with: VCR 4.0.0

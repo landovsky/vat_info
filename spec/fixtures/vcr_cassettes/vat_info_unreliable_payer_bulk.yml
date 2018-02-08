@@ -19,12 +19,12 @@ http_interactions:
       message: '200'
     headers:
       Date:
-      - Wed, 07 Feb 2018 16:20:06 GMT
+      - Thu, 08 Feb 2018 11:10:54 GMT
       Server:
       - Apache
       Set-Cookie:
-      - BIGipServerrws3http=3878706186.20480.0000; path=/
-      - JSESSIONID=04DF343690539AE2D79599E00C5EB0D4.ep3ap4; Path=/adistc; HttpOnly
+      - BIGipServerrws3http=3610270730.20480.0000; path=/
+      - JSESSIONID=EEA6540CAF48A6EE3451F2E833BD007F.ep3ap3; Path=/adistc; HttpOnly
       Accept-Ranges:
       - bytes
       Etag:
@@ -379,7 +379,7 @@ http_interactions:
         Pg0KICAgIDwvd3NkbDpwb3J0Pg0KICA8L3dzZGw6c2VydmljZT4NCjwvd3Nk
         bDpkZWZpbml0aW9ucz4=
     http_version: 
-  recorded_at: Wed, 07 Feb 2018 16:20:25 GMT
+  recorded_at: Thu, 08 Feb 2018 11:10:53 GMT
 - request:
     method: post
     uri: https://adisrws.mfcr.cz/adistc/axis2/services/rozhraniCRPDPH.rozhraniCRPDPHSOAP
@@ -453,7 +453,7 @@ http_interactions:
       message: '200'
     headers:
       Date:
-      - Wed, 07 Feb 2018 16:20:07 GMT
+      - Thu, 08 Feb 2018 11:10:55 GMT
       Server:
       - Apache
       X-Content-Type-Options:
@@ -468,7 +468,7 @@ http_interactions:
       encoding: UTF-8
       string: <?xml version='1.0' encoding='UTF-8'?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Body><StatusNespolehlivyPlatceResponse
         xmlns="http://adis.mfcr.cz/rozhraniCRPDPH/"><status statusText="OK" statusCode="0"
-        odpovedGenerovana="2018-02-07"/><statusPlatceDPH cisloFu="451" nespolehlivyPlatce="NE"
+        odpovedGenerovana="2018-02-08"/><statusPlatceDPH cisloFu="451" nespolehlivyPlatce="NE"
         dic="CZ00550655"><zverejneneUcty><ucet datumZverejneni="2013-12-12"><standardniUcet
         kodBanky="0100" cislo="29647051"/></ucet><ucet datumZverejneni="2013-12-12"><standardniUcet
         kodBanky="2700" cislo="1331585001"/></ucet></zverejneneUcty></statusPlatceDPH><statusPlatceDPH
@@ -603,5 +603,5 @@ http_interactions:
         cisloFu="460" datumZverejneniNespolehlivosti="2018-02-06" nespolehlivyPlatce="ANO"
         dic="CZ8854074152"/></StatusNespolehlivyPlatceResponse></soapenv:Body></soapenv:Envelope>
     http_version: 
-  recorded_at: Wed, 07 Feb 2018 16:20:26 GMT
+  recorded_at: Thu, 08 Feb 2018 11:10:53 GMT
 recorded_with: VCR 4.0.0

@@ -1,8 +1,5 @@
 require 'savon'
 
-require 'vat_info/models/vat_payer'
-require 'vat_info/models/vat_payers'
-
 module VatInfo
   class SchemaError < StandardError; end
 
@@ -17,7 +14,7 @@ module VatInfo
       begin
         response = client.call(endpoint, xml: request)
         if response.success?
-          VatInfo::Response.new(status_code: 200, body: response.body)
+          VatInfo::Response.new(status_code: 200, raw: response.body)
         else
           VatInfo::Response.new(status_code: 503)
         end
