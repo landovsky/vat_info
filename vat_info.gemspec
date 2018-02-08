@@ -1,5 +1,3 @@
-# coding: utf-8
-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'vat_info/version'
@@ -10,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Tomas Landovsky']
   spec.email         = ['landovsky@gmail.com']
 
-  spec.summary       = ''
+  spec.summary       = 'Ruby wrapper for web service providing info about Czech VAT payers.'
   spec.description   = 'Using mfcr.cz SOAP API to get information about Czech VAT payers.'
   spec.license       = 'MIT'
 
