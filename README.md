@@ -4,9 +4,6 @@ This is Ruby wrapper for [web service for "searching information about reliabili
 ## Installation
 `gem install 'vat_payer_cz'`
 
-## Official docs (in Czech)
-https://adisspr.mfcr.cz/adistc/adis/idpr_pub/dpr_info/ws_spdph.faces
-
 ## Usage
 The web service has the following three end-points:
 - standard VAT payer info
@@ -22,9 +19,10 @@ VatInfo.unreliable_payer(*vat_ids)
 ```
 You should see something like this:
 ```shell
-=> #<VatInfo::Response:0x0000000002756758
+=> #<VatInfo::Response:0x0000000001ff61e8
  @body=
-  {:platci=>
+  {:status=>{:status_code=>"0", :status_text=>"OK", :odpoved_generovana=>"2018-02-08"},
+   :platci=>
     [{:nespolehlivy_platce=>"NE",
       :datum_zverejneni=>nil,
       :dic=>"CZ27169278",
@@ -32,8 +30,8 @@ You should see something like this:
       :ucty=>
        [{:predcisli=>nil, :cislo=>"1041150202", :kod_banky=>"5500", :iban=>nil, :datum_zverejneni=>"2013-04-01"},
         {:predcisli=>nil, :cislo=>"6021446666", :kod_banky=>"6000", :iban=>nil, :datum_zverejneni=>"2013-12-05"},
-        {:predcisli=>nil, :cislo=>"2400915487", :kod_banky=>"2010", :iban=>nil, :datum_zverejneni=>"2016-05-05"}]}]},
- @status_code=200>
+        {:predcisli=>nil, :cislo=>"2400915487", :kod_banky=>"2010", :iban=>nil, :datum_zverejneni=>"2016-05-05"}]},
+...
 ```
 ## Response
 Object `VatInfo::Response`
@@ -44,19 +42,29 @@ Object `VatInfo::Response`
 503 - Service Unavailable: there was another error fetching the response.
 
 ### body
-Empty attributes have `nil`.
+Empty attributes have `nil` value.
 
 `VatInfo::Response.body => Hash`
 ```ruby
 {
+  status: { Status }
   platci: [ { Payer }, .. ]
+}
+```
+#### Status
+See official docs for explanation.
+```ruby
+{
+  status_code: String,
+  status_text: String,
+  odpoved_generovana: String # ISO 8601 Date
 }
 ```
 #### Payer
 ```ruby
 {
   nespolehlivy_platce: String, # "ANO" | "NE" | "NENALEZEN"
-  datum_zverejneni: String, #ISO 8601 Date,
+  datum_zverejneni: String, # ISO 8601 Date
   dic: String,
   cislo_fu: String,
   ucty: [ { Account }, .. ]
@@ -65,13 +73,15 @@ Empty attributes have `nil`.
 #### Account
 ```ruby
 {
-  predcisli: String # Czech account,
-  cislo: String,
-  kod_banky: String,
-  iban: String
+  predcisli: String, # only Czech accounts
+  cislo: String, # only Czech accounts
+  kod_banky: String, # only Czech accounts
+  iban: String # Czech and foreign accounts
 }
 ```
 
 ## Schema changes
 The client will raise `VatInfo::SchemaError` exception if it thinks the schema have changed.
 
+## Official web service docs
+In Czech: https://adisspr.mfcr.cz/adistc/adis/idpr_pub/dpr_info/ws_spdph.faces
